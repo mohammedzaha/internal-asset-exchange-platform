@@ -2,7 +2,7 @@
 
 session_start();
 
-define('BASE_URL', '/projet-stage-initiation');
+define('BASE_URL', '/internal-asset-exchange-platform');
 
 require __DIR__ . '/../helpers/SessionHelper.php';
 require __DIR__ . '/../helpers/AuthHelper.php';
