@@ -169,7 +169,9 @@ You should land on the **Login page**.
 ---
 
 ## AI-Generated Descriptions (optional)
-This feature uses Google Gemini's free API to auto-generate asset descriptions.
+- This feature uses Google Gemini's free API to auto-generate asset descriptions.
+- Natural language search on `/assets` — type a plain-English query (e.g. "cheap chairs in IT") and it auto-fills the search/category/department filters.
+
 
 1. Get a free API key at https://aistudio.google.com/apikey
 2. Copy `config/ai.example.php` to `config/ai.php`
