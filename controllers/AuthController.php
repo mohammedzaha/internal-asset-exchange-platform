@@ -36,9 +36,8 @@ class AuthController extends Controller {
         SessionHelper::set('company_id', $company['id']);
         SessionHelper::set('department', $department);
 
-        // Send welcome email (basic mail(), wrap in try to avoid crash if SMTP not configured)
-        @mail($email, 'Welcome to Internal Asset Exchange',
-            "Your company code is: {$company['company_code']}\nEmail: $email\nPassword: (the one you chose)");
+        MailHelper::send($email, $userName, 'Welcome to Asset Exchange Platform',
+            "Hello $userName,\n\nYour company workspace has been created.\n\nEmail: $email\nCompany Code: {$company['company_code']}\n\nSave your company code — you'll need it to log in.\n\nAsset Exchange Platform");
 
         // Show company code popup via flash
         SessionHelper::set('flash_company_code', $company['company_code']);

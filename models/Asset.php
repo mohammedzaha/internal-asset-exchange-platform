@@ -68,5 +68,27 @@ class Asset extends Model {
         $stmt = $this->db->prepare("UPDATE assets SET status = ? WHERE id = ? AND company_id = ?");
         $stmt->execute([$status, $id, $companyId]);
     }
+
+    public function countAvailableByCompany(int $companyId): int {
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM assets WHERE company_id = ? AND status = 'available'");
+        $stmt->execute([$companyId]);
+        return (int)$stmt->fetchColumn();
+    }
+
+    public function countTransferredByCompany(int $companyId): int {
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM assets WHERE company_id = ? AND status = 'assigned'");
+        $stmt->execute([$companyId]);
+        return (int)$stmt->fetchColumn();
+    }
+
+    public function getTopValuedAvailable(int $companyId, int $limit = 3): array {
+        $stmt = $this->db->prepare(
+            "SELECT name, value FROM assets WHERE company_id = ? AND status = 'available' ORDER BY value DESC LIMIT ?"
+        );
+        $stmt->bindValue(1, $companyId, PDO::PARAM_INT);
+        $stmt->bindValue(2, $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }
 

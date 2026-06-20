@@ -31,19 +31,21 @@
 <div class="row">
 <?php foreach ($assets as $asset): ?>
     <div class="col-md-3 mb-3">
-        <div class="card">
+        <div class="card h-100">
             <?php if ($asset['image_path']): ?>
                 <img src="<?= BASE_URL ?>/public/<?= SecurityHelper::sanitize($asset['image_path']) ?>" class="card-img-top" alt="">
+            <?php else: ?>
+                <div style="height:160px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:0.8rem;">No image</div>
             <?php endif; ?>
-            <div class="card-body">
+            <div class="card-body d-flex flex-column">
                 <h5 class="card-title"><?= SecurityHelper::sanitize($asset['name']) ?></h5>
-                <p class="card-text">
-                    Category: <?= SecurityHelper::sanitize($asset['category']) ?><br>
-                    Value: <?= SecurityHelper::sanitize($asset['value']) ?><br>
-                    Condition: <?= SecurityHelper::sanitize($asset['condition']) ?><br>
-                    Department: <?= SecurityHelper::sanitize($asset['department']) ?>
+                <p class="card-text flex-grow-1">
+                    <span style="color:var(--text-secondary)">Category:</span> <?= SecurityHelper::sanitize($asset['category']) ?><br>
+                    <span style="color:var(--text-secondary)">Value:</span> <strong><?= number_format($asset['value'], 2) ?></strong><br>
+                    <span style="color:var(--text-secondary)">Condition:</span> <?= SecurityHelper::sanitize($asset['condition']) ?><br>
+                    <span style="color:var(--text-secondary)">Dept:</span> <?= SecurityHelper::sanitize($asset['department']) ?>
                 </p>
-                <a href="<?= BASE_URL ?>/assets/show/<?= $asset['id'] ?>" class="btn btn-primary btn-sm">View Details</a>
+                <a href="<?= BASE_URL ?>/assets/show/<?= $asset['id'] ?>" class="btn btn-primary btn-sm mt-2">View Details →</a>
             </div>
         </div>
     </div>

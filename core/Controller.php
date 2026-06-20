@@ -8,4 +8,4 @@ abstract class Controller {
         header("Location: " . BASE_URL . $url);
         exit();
     }
-    }
+}

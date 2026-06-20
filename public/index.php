@@ -13,6 +13,8 @@ require __DIR__ . '/../core/Router.php';
 require __DIR__ . '/../core/Controller.php';
 require __DIR__ . '/../core/Model.php';
 
+require __DIR__ . '/../helpers/MailHelper.php';
+
 // Autoload controllers/models
 spl_autoload_register(function ($class) {
     foreach (['../controllers/', '../models/'] as $dir) {
@@ -37,7 +39,16 @@ $router->add('POST', '/assets/store', ['AssetController', 'store']);
 $router->add('GET', '/assets/show/{id}', ['AssetController', 'show']);
 $router->add('POST', '/assets/delete/{id}', ['AssetController', 'destroy']);
 
+$router->add('POST', '/transfers/request/{id}', ['TransferController', 'request']);
+$router->add('GET', '/transfers/pending', ['TransferController', 'pending']);
+$router->add('POST', '/transfers/approve/{id}', ['TransferController', 'approve']);
+$router->add('POST', '/transfers/reject/{id}', ['TransferController', 'reject']);
+$router->add('GET', '/transfers/history', ['TransferController', 'history']);
 
+$router->add('GET', '/members/create', ['MemberController', 'create']);
+$router->add('POST', '/members/store', ['MemberController', 'store']);
+$router->add('GET', '/change-password', ['UserController', 'showChangePassword']);
+$router->add('POST', '/change-password', ['UserController', 'changePassword']);
 
 $uri = $_GET['url'] ?? '';
 $router->dispatch('/' . $uri, $_SERVER['REQUEST_METHOD']);

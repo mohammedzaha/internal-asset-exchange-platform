@@ -32,4 +32,42 @@ class User extends Model {
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
+
+    public function createMember(array $data): array {
+        $tempPassword = bin2hex(random_bytes(4)); // 8-char temp password
+
+            $stmt = $this->db->prepare(
+            'INSERT INTO users (company_id, name, email, password, role, department) 
+            VALUES (?, ?, ?, ?, ?, ?)'
+        );
+    $stmt->execute([
+        $data['company_id'],
+        $data['name'],
+        $data['email'],
+        password_hash($tempPassword, PASSWORD_DEFAULT),
+        $data['role'],
+        $data['department']
+    ]);
+
+    return ['id' => (int)$this->db->lastInsertId(), 'temp_password' => $tempPassword];
+    }
+
+    public function updatePassword(int $id, string $newPassword): void {
+        $hashed = password_hash($newPassword, PASSWORD_DEFAULT);
+        $stmt = $this->db->prepare('UPDATE users SET password = ? WHERE id = ?');
+        $stmt->execute([$hashed, $id]);
+    }
+
+    public function findByEmailAndCompany(string $email, int $companyId) {
+        $stmt = $this->db->prepare('SELECT id FROM users WHERE email = ? AND company_id = ?');
+        $stmt->execute([$email, $companyId]);
+        return $stmt->fetch();
+    }
+
+    public function getLeaderByCompany(int $companyId) {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE company_id = ? AND role = 'leader' LIMIT 1");
+        $stmt->execute([$companyId]);
+        return $stmt->fetch();
+    }
+
 }

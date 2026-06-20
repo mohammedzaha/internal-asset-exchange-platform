@@ -18,4 +18,10 @@ class Company extends Model {
         $stmt->execute([$code]);
         return $stmt->fetch();
     }
+
+    public function findById(int $id){
+        $stmt = $this->db->prepare('SELECT * FROM companies WHERE id = ?');
+        $stmt->execute([$id]);
+        return $stmt->fetch();
+    }
 }
