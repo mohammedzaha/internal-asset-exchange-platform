@@ -13,6 +13,15 @@
 <h2>Available Assets</h2>
 <a href="<?= BASE_URL ?>/assets/create" class="btn btn-success mb-3">Add Asset</a>
 
+<div class="mb-3" style="max-width:600px">
+    <label>Smart Search</label>
+    <div class="d-flex gap-2">
+        <input type="text" id="nlSearchInput" class="form-control" placeholder='Try: "cheap chairs in IT department"'>
+        <button type="button" id="nlSearchBtn" class="btn btn-primary">Search</button>
+    </div>
+    <span id="nlSearchStatus" style="font-size:0.8rem;color:var(--text-secondary)"></span>
+</div>
+
 <form method="GET" action="<?= BASE_URL ?>/assets" class="row g-2 mb-3">
     <div class="col-auto">
         <input type="text" name="search" class="form-control" placeholder="Search by name" value="<?= SecurityHelper::sanitize($filters['search']) ?>">
@@ -54,6 +63,54 @@
     <p>No assets found.</p>
 <?php endif; ?>
 </div>
+
+
+<script>
+document.getElementById('nlSearchBtn').addEventListener('click', async function() {
+    const query = document.getElementById('nlSearchInput').value.trim();
+    const statusEl = document.getElementById('nlSearchStatus');
+    const btn = this;
+
+    if (!query) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Searching...';
+    statusEl.textContent = '';
+
+    try {
+        const response = await fetch('<?= BASE_URL ?>/assets/interpret-query', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `query=${encodeURIComponent(query)}`
+        });
+        const data = await response.json();
+
+        if (data.error) {
+            statusEl.textContent = data.error;
+        } else {
+            // Redirect to /assets with the AI-extracted filters as normal GET params
+            const params = new URLSearchParams();
+            if (data.search) params.set('search', data.search);
+            if (data.category) params.set('category', data.category);
+            if (data.department) params.set('department', data.department);
+            window.location.href = '<?= BASE_URL ?>/assets?' + params.toString();
+        }
+    } catch (err) {
+        statusEl.textContent = 'Network error. Try again.';
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Search';
+    }
+});
+
+// Allow Enter key to trigger search
+document.getElementById('nlSearchInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('nlSearchBtn').click();
+    }
+});
+</script>
 
 <?php require __DIR__ . '/../layouts/footer.php'; ?>
 

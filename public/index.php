@@ -50,6 +50,10 @@ $router->add('POST', '/members/store', ['MemberController', 'store']);
 $router->add('GET', '/change-password', ['UserController', 'showChangePassword']);
 $router->add('POST', '/change-password', ['UserController', 'changePassword']);
 
+$router->add('POST', '/assets/generate-description', ['AssetController', 'generateDescription']);
+$router->add('POST', '/assets/interpret-query', ['AssetController', 'interpretQuery']);
+
+
 $uri = $_GET['url'] ?? '';
 $router->dispatch('/' . $uri, $_SERVER['REQUEST_METHOD']);
 

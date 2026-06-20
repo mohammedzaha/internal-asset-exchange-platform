@@ -168,6 +168,14 @@ You should land on the **Login page**.
 
 ---
 
+## AI-Generated Descriptions (optional)
+This feature uses Google Gemini's free API to auto-generate asset descriptions.
+
+1. Get a free API key at https://aistudio.google.com/apikey
+2. Copy `config/ai.example.php` to `config/ai.php`
+3. Paste your API key into `config/ai.php`
+
+
 ## Testing Multi-Tenant Isolation
 
 Create a **second company** (different email, new "Create Company" form) and confirm:
