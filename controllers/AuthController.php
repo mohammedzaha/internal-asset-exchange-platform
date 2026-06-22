@@ -2,7 +2,7 @@
 class AuthController extends Controller {
 
     public function showCreateCompany(): void {
-        $this->view('auth/create_company');
+        $this->view('auth/create_company');        
     }
 
     public function createCompany(): void {
@@ -43,6 +43,7 @@ class AuthController extends Controller {
         SessionHelper::set('flash_company_code', $company['company_code']);
 
         $this->redirect('/dashboard');
+        
     }
 
     public function showLogin(): void {

@@ -4,7 +4,7 @@
 <h2>Add New Asset</h2>
 <?php if (!empty($error)): ?><div class="alert alert-danger"><?= SecurityHelper::sanitize($error) ?></div><?php endif; ?>
 
-<form method="POST" action="<?= BASE_URL ?>/assets/store" enctype="multipart/form-data">
+<form id="add_asset_form" method="POST" action="<?= BASE_URL ?>/assets/store" enctype="multipart/form-data">
     <div class="mb-3"><label>Name</label><input type="text" name="name" class="form-control" required></div>
     <div class="mb-3"><label>Category</label><input type="text" name="category" class="form-control" required></div>
 
@@ -19,7 +19,7 @@
     <div class="mb-3"><label>Condition</label><input type="text" name="condition" class="form-control"></div>
     <div class="mb-3"><label>Department</label><input type="text" class="form-control" value="<?= SecurityHelper::sanitize(SessionHelper::get('department')) ?>" disabled></div>
     <div class="mb-3"><label>Image</label><input type="file" name="image" class="form-control" accept="image/*"></div>
-    <button type="submit" class="btn btn-primary">Add Asset</button>
+    <button type="submit" id="add_asset_submit_btn" class="btn btn-primary">Add Asset</button>
 </form>
 
 
@@ -59,6 +59,13 @@ document.getElementById('generateBtn').addEventListener('click', async function(
         btn.textContent = '✨ Generate with AI';
     }
 });
+
+document.querySelector('#add_asset_form').addEventListener('submit', function(){
+    const btn = document.getElementById('add_asset_submit_btn');
+    btn.disabled = true;
+    btn.innerText = "Processing...";
+});
+
 </script>
 
 <?php require __DIR__ . '/../layouts/footer.php'; ?>
