@@ -1,0 +1,35 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=db
+      - DB_NAME=internal_asset_exchange_db
+      - DB_USER=assetuser
+      - DB_PASS=assetpass
+    volumes:
+      - ./public/uploads:/var/www/html/internal-asset-exchange-platform/public/uploads
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: internal_asset_exchange_db
+      MYSQL_USER: assetuser
+      MYSQL_PASSWORD: assetpass
+    volumes:
+      - ./.docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 10s
+      retries: 20
+      start_period: 30s
+
+volumes:
+  db_data:

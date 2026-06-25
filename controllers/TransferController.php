@@ -69,6 +69,8 @@ class TransferController extends Controller {
         $assetModel->updateStatus($request['asset_id'], 'assigned', $companyId);
         $transferModel->updateStatus($id, 'approved', (int)SessionHelper::get('user_id'));
 
+        $asset = $assetModel->findById($request['asset_id'], $companyId);
+
         // Notify requester by email
         $userModel = new User();
         $requester = $userModel->findById($request['requester_id']);
@@ -77,7 +79,7 @@ class TransferController extends Controller {
                 $requester['email'],
                 $requester['name'],
                 'Transfer Request Approved — Asset Exchange Platform',
-                "Hello {$requester['name']},\n\nYour transfer request for asset \"{$request['asset_name']}\" has been approved.\n\nAsset Exchange Platform"
+                "Hello {$requester['name']},\n\nYour transfer request for asset \"{$asset['name']}\" has been approved.\n\nAsset Exchange Platform"
             );
         }
 
@@ -102,6 +104,8 @@ class TransferController extends Controller {
         $assetModel->updateStatus($request['asset_id'], 'available', $companyId);
         $transferModel->updateStatus($id, 'rejected');
 
+        $asset = $assetModel->findById($request['asset_id'], $companyId);
+
         // Notify requester by email
         $userModel = new User();
         $requester = $userModel->findById($request['requester_id']);
@@ -110,7 +114,7 @@ class TransferController extends Controller {
                 $requester['email'],
                 $requester['name'],
                 'Transfer Request Rejected — Asset Exchange Platform',
-                "Hello {$requester['name']},\n\nYour transfer request for asset \"{$request['asset_name']}\" has been rejected. The asset is now available again.\n\nAsset Exchange Platform"
+                "Hello {$requester['name']},\n\nYour transfer request for asset \"{$asset['name']}\" has been rejected. The asset is now available again.\n\nAsset Exchange Platform"
             );
         }
 

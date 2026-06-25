@@ -56,7 +56,23 @@ class Asset extends Model {
         return $stmt->fetch();
     }
 
+    public function findNameById(int $id) {
+        $stmt = $this->db->prepare(
+            "SELECT name AS asset_name 
+            FROM assets
+            WHERE id = ?"
+        );
+        $stmt->execute([$id]);
+        return $stmt->fetchColumn();
+    }
+
     public function delete(int $id, int $companyId): bool {
+
+        //Delete related related tansfer_log records
+        $stmt = $this->db->prepare('DELETE FROM transfer_log WHERE asset_id = ?');
+        $stmt->execute([$id]);
+
+        //Delete the Asset
         $stmt = $this->db->prepare(
             "DELETE FROM assets WHERE id = ? AND company_id = ? AND status = 'available'"
         );

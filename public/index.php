@@ -17,9 +17,16 @@ require __DIR__ . '/../helpers/MailHelper.php';
 
 // Autoload controllers/models
 spl_autoload_register(function ($class) {
-    foreach (['../controllers/', '../models/'] as $dir) {
-        $file = __DIR__ . '/' . $dir . $class . '.php';
-        if (file_exists($file)) require $file;
+    $dirs = [
+        __DIR__ . '/../controllers/',
+        __DIR__ . '/../models/'
+    ];
+    foreach ($dirs as $dir) {
+        $file = $dir . $class . '.php';
+        if (file_exists($file)) {
+            require $file;
+            return;
+        }
     }
 });
 
@@ -30,7 +37,7 @@ $router->add('POST', '/create-company', ['AuthController', 'createCompany']);
 $router->add('GET', '/login', ['AuthController', 'showLogin']);
 $router->add('POST', '/login', ['AuthController', 'login']);
 $router->add('GET', '/logout', ['AuthController', 'logout']);
-$router->add('GET', '/dashboard', ['DashboardController', 'index']);
+$router->add('GET', '/dashboard', ['DashBoardController', 'index']);
 $router->add('GET', '/', ['AuthController', 'showLogin']);
 
 $router->add('GET', '/assets', ['AssetController', 'index']);

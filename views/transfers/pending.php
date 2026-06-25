@@ -6,7 +6,7 @@
 ?>
 
 <?php if (!empty($_SESSION['flash_message'])): ?>
-<script>alert('<?= addslashes($_SESSION['flash_message']) ?>');</script>
+<script> alert('<?= addslashes($_SESSION['flash_message']) ?>'); </script>
 <?php unset($_SESSION['flash_message']); endif; ?>
 
 <h2>Pending Transfer Requests</h2>
