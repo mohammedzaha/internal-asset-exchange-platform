@@ -39,13 +39,17 @@ The easiest way — no XAMPP, no phpMyAdmin, no manual database setup needed.
 
 ### Steps
 
-**1. Clone the repository:**
+**1. Clone the repository $ Set up the database file:**
 ```bash
-git clone https://github.com/mohammed-zaha/internal_asset_exchange.git
-cd internal_asset_exchange
+git clone https://github.com/mohammedzaha/internal-asset-exchange-pltform.git
+cd internal-asset-exchange-pltform
 ```
 
-**2. (Optional) Set up AI features:**
+```bash
+cp config/database.example.php config/database.php
+```
+
+**2.  Set up AI features:**
 ```bash
 cp config/ai.example.php config/ai.php
 ```

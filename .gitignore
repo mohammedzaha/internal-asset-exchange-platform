@@ -3,4 +3,3 @@ public/uploads/assets/*
 !public/uploads/assets/.gitkeep
 config/ai.php
 db_data/
-libraries/
