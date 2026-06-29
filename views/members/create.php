@@ -1,6 +1,8 @@
 <?php require __DIR__ . '/../layouts/header.php'; ?>
 <?php require __DIR__ . '/../layouts/navbar.php'; ?>
 
+<div class="container-fluid px-4">
+
 <h2>Add New Member</h2>
 <?php if (!empty($error)): ?><div class="alert alert-danger"><?= SecurityHelper::sanitize($error) ?></div><?php endif; ?>
 
@@ -17,6 +19,8 @@
     </div>
     <button type="submit" class="btn btn-primary">Add Member</button>
 </form>
+
+</div>
 
 <?php require __DIR__ . '/../layouts/footer.php'; ?>
 

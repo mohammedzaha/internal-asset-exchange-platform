@@ -1,6 +1,8 @@
 <?php require __DIR__ . '/../layouts/header.php'; ?>
 <?php require __DIR__ . '/../layouts/navbar.php'; ?>
 
+<div class="container-fluid px-4">
+
 <?php
 /** @var array $requests */
 ?>
@@ -44,6 +46,8 @@
         </div>
     </div>
 <?php endforeach; ?>
+</div>
+
 </div>
 
 <?php require __DIR__ . '/../layouts/footer.php'; ?>

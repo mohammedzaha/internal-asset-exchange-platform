@@ -1,6 +1,8 @@
 <?php require __DIR__ . '/../layouts/header.php'; ?>
 <?php require __DIR__ . '/../layouts/navbar.php'; ?>
 
+<div class="container-fluid px-4">
+
 <?php
 /** @var float $totalSavings */
 /** @var array $filters */
@@ -47,5 +49,7 @@
     </table>
 </div>
 <?php endif; ?>
+
+</div>
 
 <?php require __DIR__ . '/../layouts/footer.php'; ?>

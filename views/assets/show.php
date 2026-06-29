@@ -1,6 +1,8 @@
 <?php require __DIR__ . '/../layouts/header.php'; ?>
 <?php require __DIR__ . '/../layouts/navbar.php'; ?>
 
+<div class="container-fluid px-4">
+
 <?php
 /** @var array $asset */
 /** @var bool $canUndo */
@@ -63,6 +65,8 @@
             </form>
         <?php endif; ?>
     </div>
+</div>
+
 </div>
 
 <?php require __DIR__ . '/../layouts/footer.php'; ?>

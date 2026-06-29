@@ -1,6 +1,8 @@
 <?php require __DIR__ . '/../layouts/header.php'; ?>
 <?php require __DIR__ . '/../layouts/navbar.php'; ?>
 
+<div class="container-fluid px-4">
+
 <?php
 /** @var array $assets */
 /** @var array $filters */
@@ -111,6 +113,8 @@ document.getElementById('nlSearchInput').addEventListener('keypress', function(e
     }
 });
 </script>
+
+</div>
 
 <?php require __DIR__ . '/../layouts/footer.php'; ?>
 

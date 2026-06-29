@@ -8,4 +8,6 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/css/style.css">
 </head>
 <body>
-<div class="container">
+<!--
+<div class="container-fluid px-4">
+-->

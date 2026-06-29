@@ -1,6 +1,8 @@
 <?php require __DIR__ . '/layouts/header.php'; ?>
 <?php require __DIR__ . '/layouts/navbar.php'; ?>
 
+<div class="container-fluid px-4">
+
 <div style="max-width:480px">
 <h2>Change Password</h2>
 <?php if (!empty($error)): ?><div class="alert alert-danger"><?= SecurityHelper::sanitize($error) ?></div><?php endif; ?>
@@ -10,6 +12,8 @@
     <div class="mb-3"><label>Confirm New Password</label><input type="password" name="confirm_password" class="form-control" required></div>
     <button type="submit" class="btn btn-primary">Update Password</button>
 </form>
+</div>
+
 </div>
 
 <?php require __DIR__ . '/layouts/footer.php'; ?>

@@ -10,6 +10,7 @@
           <span class="badge">
             <?= SecurityHelper::sanitize(SessionHelper::get('role')) ?>
           </span>
+            <a href="<?= BASE_URL ?>/dashboard" class="btn btn-outline-light btn-sm me-2">Dashboard</a>
             <a href="<?= BASE_URL ?>/assets" class="btn btn-outline-light btn-sm">View Assets</a>
             <a href="<?= BASE_URL ?>/assets/create" class="btn btn-outline-light btn-sm">Add Asset</a>
 

@@ -1,6 +1,8 @@
 <?php require __DIR__ . '/layouts/header.php'; ?>
 <?php require __DIR__ . '/layouts/navbar.php'; ?>
 
+<div class="container-fluid px-4">
+
 <?php 
 /** @var string $memberTempPassword  */
 /** @var string $role  */
@@ -72,5 +74,7 @@
         <li class="list-group-item" style="color:var(--text-secondary)">No assets available yet.</li>
     <?php endif; ?>
 </ul>
+
+</div>
 
 <?php require __DIR__ . '/layouts/footer.php'; ?>
